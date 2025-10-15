@@ -92,6 +92,11 @@ curl -X POST http://localhost:3000/api/atomic/CreateUser   -H 'content-type: app
 See detailed walkthrough in `docs/mock-server.md`.
 
 
+## run in podman container
+podman run -it --rm -p 3200-3205:3000-3005 -v $(pwd):/app:z -v /app/node_modules node:22-alpine /bin/sh
+apk add --update nodejs bash vim yarn git npm pnpm curl
+bash
+cd /app
 
 ## Concurrent demo runner
 

@@ -38,6 +38,7 @@
     "dev": "pnpm -C examples/nuxt-app dev",
     "lint": "eslint .",
     "prepublishOnly": "pnpm run build",
+    "prepare": "pnpm -w build",
     "demo": "concurrently -k -n MOCK,NUXT -c blue,green \"pnpm -C examples/mock-server start\" \"pnpm -C examples/nuxt-app dev\"",
     "test:e2e": "vitest run --coverage examples/e2e"
   },
