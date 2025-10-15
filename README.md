@@ -77,6 +77,7 @@ For a full, runnable sample, see `examples/nuxt-app`.
 
 1) Start mock server
 ```bash
+pnpm -w build
 pnpm -C examples/mock-server i
 pnpm -C examples/mock-server start
 ```
@@ -101,9 +102,15 @@ cd /app
 ## Concurrent demo runner
 
 ```bash
+pnpm -w build
 pnpm i
 pnpm demo
 # runs mock server (3001) and example Nuxt app (3000) together
+
+# quick test
+curl -X GET http://localhost:3001/health   -H 'content-type: application/json'   -d '{"name":"Ada","email":"ada@lovelace.io","credits":50}'
+output:
+{"ok":true}
 ```
 
 ## E2E tests (Vitest)
