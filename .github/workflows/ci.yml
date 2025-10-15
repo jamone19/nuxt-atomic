@@ -1,0 +1,42 @@
+
+name: CI
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install root deps
+        run: pnpm i
+
+      - name: Install example deps
+        run: |
+          pnpm -C examples/mock-server i
+          pnpm -C examples/nuxt-app i
+
+      - name: Run E2E
+        run: pnpm test:e2e
+
+- name: Upload coverage
+  uses: actions/upload-artifact@v4
+  with:
+    name: coverage-report
+    path: coverage/**
+    if-no-files-found: warn

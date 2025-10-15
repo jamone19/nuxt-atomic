@@ -1,0 +1,9 @@
+
+node_modules
+dist
+.nitro
+.nuxt
+.nuxt-atomic
+*.log
+.DS_Store
+coverage
