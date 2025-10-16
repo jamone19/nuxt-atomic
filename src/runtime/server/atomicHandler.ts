@@ -99,9 +99,11 @@ export function createAtomicHandler(transactions: Record<string, TransactionDefi
         const hydrate = await loadHydrator(step.hydrate)
         const composed = { ...original, ...chainAcc, ...(mode === 'put' ? windowAcc : {}) }
         const input = await hydrate(composed, { context, successes, chainAcc, windowAcc, mode })
-        const url = templateUrl(step.execute.url, { ...input })
+	// merge *all* known vars so :id can be filled from prior steps
+        const varsForUrl = { ...chainAcc, ...windowAcc, ...(input || {}) }
+        const url = templateUrl(step.execute.url, varsForUrl)
 
-        await log('info', logDir, { msg: 'Step execute', name, step: step.key, url, method: step.execute.method, mode })
+        await log('info', logDir, { msg: 'Step execute', name, step: step.key, url, method: step.execute.method, mode, vars: Object.keys(varsForUrl) })
 
         const result = await $fetch(url, {
           method: step.execute.method,
@@ -124,7 +126,11 @@ export function createAtomicHandler(transactions: Record<string, TransactionDefi
         const rollbackReports: Array<{ key: string, ok: boolean, error?: string }> = []
         for (const s of [...successes].reverse()) {
           try {
-            const rbUrl = templateUrl(s.step.rollback.url, { ...(s.vars || {}), ...(s.result || {}) })
+	    // (also include accumulated values up to that point)
+            const rbUrl = templateUrl(
+              s.step.rollback.url,
+              { ...(s.vars || {}), ...(s.result || {}), ...chainAcc } // safe, last write wins
+            )
             await log('warn', logDir, { msg: 'Rollback execute', name, step: s.step.key, url: rbUrl, method: s.step.rollback.method })
             await $fetch(rbUrl, {
               method: s.step.rollback.method,

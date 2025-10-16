@@ -34,6 +34,12 @@ export default defineNuxtConfig({
             hydrate: { module: '~/atomic/steps/userCreate' }
           },
           {
+            // That’s intentional in the sample: the step points to http://localhost:3999/nowhere 
+		  // to demonstrate compensating rollbacks. Your output shows the rollback of 
+		  // CreateDBUser ran and succeeded, which is exactly what we want to showcase.
+
+            // If you want CreateUserFail to succeed, change that step’s URL in examples/nuxt-app/nuxt.config.ts 
+		  // to a real endpoint (e.g. the same credits service on port 3001), rebuild, and run again.
             key: 'GrantWelcomeCredits',
             execute: { method: 'POST', url: 'http://localhost:3999/nowhere' }, // force failure
             rollback: { method: 'POST', url: 'http://localhost:3001/mock/credits/revoke' },
