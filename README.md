@@ -113,6 +113,31 @@ output:
 {"ok":true}
 ```
 
+
+## Test demo app
+### Create once and capture Service A ID
+```bash
+RES=$(curl -sS -X POST http://localhost:3000/api/atomic/CreateUserEverywhere \
+  -H 'content-type: application/json' \
+  -d '{"name":"A","email":"a@a.com"}')
+
+A_ID=$(echo "$RES" | jq -r '.results[] | select(.step=="CreateInServiceA") | .result.id')
+echo "Service A ID: $A_ID"
+```
+
+### Hit mock endpoints directly
+```bash
+curl -sS "http://localhost:3001/mock/users/$A_ID/profile" | jq
+curl -sS "http://localhost:3001/mock/users/$A_ID/recs" | jq
+```
+
+### Create a User across multiple services
+```bash
+curl -sS -X POST "http://localhost:3000/api/atomic/CreateUserEverywhere" \
+  -H "content-type: application/json" \
+  -d '{"name":"Alicia","email":"alicia@example.com"}' | jq
+```
+
 ## E2E tests (Vitest)
 
 > Requires you to install deps in both example folders.
@@ -124,7 +149,20 @@ pnpm test:e2e
 ```
 The tests spin up both processes, verify **CreateUser** succeeds, and **CreateUserFail** triggers a rollback with a proper report.
 
+### Quick health/handler checks
 
+Unknown transaction (proves handler is mounted):
+
+```bash
+curl -sS -X POST "http://localhost:3000/api/atomic/Nope" -H "content-type: application/json" -d '{}' | jq
+```
+
+
+### Tail the atomic log (shows step execution & rollbacks):
+
+```bash
+tail -f examples/nuxt-app/.nuxt-atomic/logs/atomic.log
+```
 
 ### Step modes (data passing)
 
