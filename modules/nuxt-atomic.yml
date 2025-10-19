@@ -1,0 +1,16 @@
+name: nuxt-atomic
+description: Atomic (saga-like) transactions for Nuxt 4 — sequential steps, rollback, typed hydrators.
+repo: jamone19/nuxt-atomic
+npm: '@nuxt/nuxt-atomic'
+icon: nuxt-atomic
+github: https://github.com/jamone19/nuxt-atomic
+website: https://github.com/jamone19/nuxt-atomic
+learn_more: https://github.com/jamone19/nuxt-atomic#readme
+category: Extensions        # pick from the official categories list
+type: 3rd-party
+compatibility:
+  nuxt: ^4.0.0
+maintainers:
+   - name: Jairo A. Medina C.
+     github: jamone19
+
