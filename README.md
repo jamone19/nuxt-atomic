@@ -197,8 +197,8 @@ cd /app
 ## Concurrent demo runner
 
 ```bash
-pnpm -w build
 pnpm i
+pnpm -w build
 pnpm demo
 # runs mock server (3001) and example Nuxt app (3000) together
 
