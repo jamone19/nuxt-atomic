@@ -27,11 +27,11 @@ export interface ModuleOptions {
 }
 
 export default defineNuxtModule<ModuleOptions>({
-  meta: { name: '@nuxt/nuxt-atomic', configKey: 'atomic', compatibility: { nuxt: '>=3.12.0' } },
+  meta: { name: '@jamone19/nuxt-atomic', configKey: 'atomic', compatibility: { nuxt: '>=3.12.0' } },
   defaults: { baseRoute: '/api/atomic', logDir: '.nuxt-atomic/logs', transactions: {} },
 
   async setup (options, nuxt) {
-    const logger = useLogger('@nuxt/nuxt-atomic')
+    const logger = useLogger('@jamone19/nuxt-atomic')
     const { resolve } = createResolver(import.meta.url)
 
     // Runtime config for handler

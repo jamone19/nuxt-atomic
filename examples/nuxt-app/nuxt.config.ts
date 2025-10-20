@@ -2,7 +2,7 @@
 import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
-  modules: ['@nuxt/nuxt-atomic'],
+  modules: ['@jamone19/nuxt-atomic'],
   nitro: { preset: 'node-server' },
 
   atomic: {

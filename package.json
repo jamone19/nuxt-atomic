@@ -1,5 +1,5 @@
 {
-  "name": "@nuxt/nuxt-atomic",
+  "name": "@jamone19/nuxt-atomic",
   "version": "0.1.0",
   "description": "Nuxt 4 module for atomic (saga-like) multi-step transactions with automatic server routes, rollbacks, and logging.",
   "type": "module",

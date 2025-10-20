@@ -59,7 +59,7 @@ Runtime keeps two accumulators:
 
 ## Typed hydrate helper
 
-`@nuxt/nuxt-atomic/runtime` exposes:
+`@jamone19/nuxt-atomic/runtime` exposes:
 ```ts
 export interface HydrateContext<Source = any, Acc = Record<string, any>> { /* ... */ }
 export function createHydrator<In, Out>(

@@ -1,5 +1,5 @@
 
-import { createHydrator } from '@nuxt/nuxt-atomic/runtime'
+import { createHydrator } from '@jamone19/nuxt-atomic/runtime'
 
 /** Input can include chain/window accumulators */
 type In = { name: string; email: string } & Record<string, any>

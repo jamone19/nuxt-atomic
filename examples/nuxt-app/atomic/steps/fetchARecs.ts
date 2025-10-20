@@ -1,5 +1,5 @@
 
-import { createHydrator } from '@nuxt/nuxt-atomic/runtime'
+import { createHydrator } from '@jamone19/nuxt-atomic/runtime'
 
 type In = { id?: string } & Record<string, any>
 type Out = Record<string, never>
