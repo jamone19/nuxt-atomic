@@ -40,7 +40,8 @@
     "prepublishOnly": "pnpm run build",
     "prepare": "pnpm -w build",
     "demo": "concurrently -k -n MOCK,NUXT -c blue,green \"pnpm -C examples/mock-server start\" \"pnpm -C examples/nuxt-app dev --host\"",
-    "test:e2e": "vitest run --coverage examples/e2e"
+    "test:e2e": "vitest run --coverage examples/e2e",
+    "clean": "rm -rf node_modules/ .nuxt .output package-lock.json yarn.lock .pnpm dist/ examples/mock-server/node_modules/ examples/nuxt-app/node_modules/ examples/nuxt-app/.nuxt/ examples/nuxt-app/.nuxt-atomic/"
   },
   "peerDependencies": {
     "nuxt": "^4.0.0",
